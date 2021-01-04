@@ -18,10 +18,8 @@ namespace BookSearch
         {
             DisplayWelcome();
 
-            var input = consoleIO.Prompt("Search...");
+            var input = consoleIO.Prompt("Enter search term...");
             await googleBooks.Search(input);
-
-            Console.WriteLine("Wrapper done");
         }
 
         void DisplayWelcome()

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
-using System.Resources;
-using System.Text.Json;
 using System.Threading.Tasks;
+
 namespace BookSearch
 {
     class Program
@@ -14,20 +11,15 @@ namespace BookSearch
             var consoleIO = new ConsoleIO();
             consoleIO.Clear();
 
-            string ApiKeysPath = Path.GetRelativePath("./", "ApiKeys.json");
-            string jsonStr = File.ReadAllText(ApiKeysPath);
-            var apiKeys = JsonSerializer.Deserialize<ApiKeys>(jsonStr);
+            var jsonIO = new JsonIO();
+            var apiKeys = jsonIO.DeserializeFromRelativePath("./", "ApiKeys.json");
+            string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
 
             var fetcher = new Fetcher(new HttpClient());
-            var googleBooks = new GoogleBooks(fetcher, apiKeys.GoogleBooksApiKey);
+            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey);
 
             var wrapper = new Wrapper(consoleIO, googleBooks);
             await wrapper.Start();
         }
-    }
-
-    public class ApiKeys
-    {
-        public string GoogleBooksApiKey { get; set; }
     }
 }
