@@ -17,8 +17,9 @@ namespace BookSearch
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
             var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey);
+            var appLoop = new AppLoop(textIO, googleBooks);
 
-            var wrapper = new Wrapper(textIO, googleBooks);
+            var wrapper = new AppLoopStarter(textIO, appLoop);
             await wrapper.Start();
         }
     }
