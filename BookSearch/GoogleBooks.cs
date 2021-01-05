@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
+using BookSearch.Models;
 
 namespace BookSearch
 {
@@ -15,16 +18,34 @@ namespace BookSearch
             this.apiKey = ApiKey;
         }
 
-        public async Task<object> Search(string input)
+        public async Task<List<Book>> Search(string input)
         {
-            object response = await fetcher.HttpGet(generateVolumeUrl(input));
+            try
+            {
+                var response = await fetcher.HttpGet(GenerateVolumeUrl(input));
+                var items = response.GetValue("items");
 
-            return response;
+                List<Book> books = new List<Book>();
+
+                foreach (var book in items)
+                {
+                    books.Add(new Book(book));
+                }
+
+
+                return books;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
         }
 
-        string generateVolumeUrl(string query)
+        string GenerateVolumeUrl(string query)
         {
-            return $"{this.baseUrl}volumes?q={query}&key={this.apiKey}";
+            var fields = "items(id,volumeInfo(title,publishedDate,industryIdentifiers,categories,authors,publisher,description,pageCount))";
+            return $"{this.baseUrl}volumes?q={query}&fields={fields}&maxResults={5}&key={this.apiKey}";
         }
     }
 }

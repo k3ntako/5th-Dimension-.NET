@@ -17,5 +17,10 @@ namespace BookSearch
         {
             Console.Clear();
         }
+
+        public void Error(Exception ex)
+        {
+            Console.WriteLine(ex.ToString());  
+        }
     }
 }

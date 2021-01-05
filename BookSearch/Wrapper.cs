@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using BookSearch.Models;
 
 namespace BookSearch
 {
@@ -19,12 +21,27 @@ namespace BookSearch
             DisplayWelcome();
 
             var input = consoleIO.Prompt("Enter search term...");
-            await googleBooks.Search(input);
+            var books = await googleBooks.Search(input);
+
+            PrintBooks(books);
         }
 
         void DisplayWelcome()
         {
-            this.consoleIO.Print("Welcome to Google Books");
+            consoleIO.Print("Welcome to Book Search!");
+        }
+
+        void PrintBooks(List<Book> books)
+        {
+            if (books is null)
+            {
+                return;
+            }
+
+            foreach (var book in books)
+            {
+                consoleIO.Print(book.FormatAsString());
+            }
         }
     }
 }

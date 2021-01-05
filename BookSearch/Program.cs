@@ -15,7 +15,7 @@ namespace BookSearch
             var apiKeys = jsonIO.DeserializeFromRelativePath("./", "ApiKeys.json");
             string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
 
-            var fetcher = new Fetcher(new HttpClient());
+            var fetcher = new Fetcher(new HttpClient(), jsonIO);
             var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey);
 
             var wrapper = new Wrapper(consoleIO, googleBooks);
