@@ -4,8 +4,8 @@ namespace BookSearch
 {
     public class AppLoopStarter
     {
-        ITextIO textIO;
-        AppLoop appLoop;
+        readonly ITextIO textIO;
+        readonly AppLoop appLoop;
 
         public AppLoopStarter(ITextIO textIO, AppLoop appLoop)
         {

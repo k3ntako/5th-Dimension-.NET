@@ -7,7 +7,7 @@ namespace BookSearch
     public class Fetcher
     {
         HttpClient httpClient;
-        JsonIO jsonIO;
+        readonly JsonIO jsonIO;
 
         public Fetcher(HttpClient httpClient, JsonIO jsonIO)
         {

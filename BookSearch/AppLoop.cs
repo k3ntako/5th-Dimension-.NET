@@ -8,8 +8,8 @@ namespace BookSearch
 {
     public class AppLoop
     {
-        ITextIO textIO;
-        GoogleBooks googleBooks;
+        readonly ITextIO textIO;
+        readonly GoogleBooks googleBooks;
 
         public AppLoop(ITextIO textIO, GoogleBooks googleBooks)
         {

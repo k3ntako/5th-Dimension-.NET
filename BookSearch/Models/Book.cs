@@ -6,46 +6,46 @@ namespace BookSearch.Models
 {
     public class Book
     {
-        string id;
-        string title;
-        string[] authors;
-        string publisher;
-        string description;
-        UInt32 pageCount;
-        string publishedDate;
-        Dictionary<string, string>[] industryIdentifiers;
-        string[] categories;
+        readonly string id;
+        readonly string title;
+        readonly string[] authors;
+        readonly string publisher;
+        readonly string description;
+        readonly UInt32 pageCount;
+        readonly string publishedDate;
+        readonly Dictionary<string, string>[] industryIdentifiers;
+        readonly string[] categories;
 
         public Book(JToken bookParams)
         {
             try
             {
-                this.id = bookParams.Value<string>("id");
+                id = bookParams.Value<string>("id");
 
                 var volumeInfo = bookParams.Value<JObject>("volumeInfo");
 
-                this.title = volumeInfo.Value<string>("title");
-                this.publisher = volumeInfo.Value<string>("publisher");
-                this.description = volumeInfo.Value<string>("description");
-                this.pageCount = volumeInfo.Value<UInt32>("pageCount");
-                this.publishedDate = volumeInfo.Value<string>("publishedDate");
+                title = volumeInfo.Value<string>("title");
+                publisher = volumeInfo.Value<string>("publisher");
+                description = volumeInfo.Value<string>("description");
+                pageCount = volumeInfo.Value<UInt32>("pageCount");
+                publishedDate = volumeInfo.Value<string>("publishedDate");
 
                 var authorsJArray = (JArray)volumeInfo.GetValue("authors");
                 if (authorsJArray is not null)
                 {
-                    this.authors = authorsJArray.ToObject<string[]>();
+                    authors = authorsJArray.ToObject<string[]>();
                 }
 
                 var identifiersJArray = (JArray)volumeInfo.GetValue("industryIdentifiers");
                 if(identifiersJArray is not null)
                 {
-                    this.industryIdentifiers = identifiersJArray.ToObject<Dictionary<string, string>[]>();
+                    industryIdentifiers = identifiersJArray.ToObject<Dictionary<string, string>[]>();
                 }
 
                 var categoriesJArray = (JArray)volumeInfo.GetValue("categories");
                 if(categoriesJArray is not null)
                 {
-                    this.categories = categoriesJArray.ToObject<string[]>();
+                    categories = categoriesJArray.ToObject<string[]>();
                 }
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace BookSearch.Models
             }
         }
 
-        string FormatField(string fieldVal)
+        static string FormatField(string fieldVal)
         {
             if (fieldVal is null)
             {
@@ -88,7 +88,7 @@ namespace BookSearch.Models
             return $"{fieldVal}{Environment.NewLine}";
         }
 
-        string FormatField(string fieldTitle, string fieldVal)
+        static string FormatField(string fieldTitle, string fieldVal)
         {
             if(fieldVal is null)
             {
@@ -98,17 +98,17 @@ namespace BookSearch.Models
             return $"{fieldTitle}: {fieldVal}{Environment.NewLine}";
         }
 
-        string FormatField(string fieldTitle, string[] fieldVal)
+        static string FormatField(string fieldTitle, string[] fieldVal)
         {
             if (fieldVal is null)
             {
                 return "";
             }
 
-            return $"{fieldTitle}: {String.Join(", ", fieldVal)}{Environment.NewLine}";
+            return $"{fieldTitle}: {string.Join(", ", fieldVal)}{Environment.NewLine}";
         }
 
-        string FormatField(string fieldTitle, string fieldVal, int maxLength)
+        static string FormatField(string fieldTitle, string fieldVal, int maxLength)
         {
             if (fieldVal is null)
             {
