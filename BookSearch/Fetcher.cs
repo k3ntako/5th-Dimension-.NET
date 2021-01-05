@@ -1,9 +1,5 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text.Json;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BookSearch
@@ -20,7 +16,7 @@ namespace BookSearch
         }
 
         public async Task<JObject> HttpGet(string url){
-            var response = await this.httpClient.GetStringAsync(url);
+            var response = await httpClient.GetStringAsync(url);
             return jsonIO.Deserialize(response);
         }
     }
