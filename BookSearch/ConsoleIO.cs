@@ -1,7 +1,7 @@
 ﻿using System;
 namespace BookSearch
 {
-    public class ConsoleIO
+    public class ConsoleIO : ITextIO
     {
         public void Print(string str) {
             Console.WriteLine(str);

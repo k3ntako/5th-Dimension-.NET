@@ -8,8 +8,8 @@ namespace BookSearch
     {
         static async Task Main(string[] args)
         {
-            var consoleIO = new ConsoleIO();
-            consoleIO.Clear();
+            var textIO = new ConsoleIO();
+            textIO.Clear();
 
             var jsonIO = new JsonIO();
             var apiKeys = jsonIO.DeserializeFromRelativePath("./", "ApiKeys.json");
@@ -18,7 +18,7 @@ namespace BookSearch
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
             var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey);
 
-            var wrapper = new Wrapper(consoleIO, googleBooks);
+            var wrapper = new Wrapper(textIO, googleBooks);
             await wrapper.Start();
         }
     }

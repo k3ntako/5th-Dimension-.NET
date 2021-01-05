@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BookSearch.Models;
 
@@ -7,12 +6,12 @@ namespace BookSearch
 {
     public class Wrapper
     {
-        ConsoleIO consoleIO;
+        ITextIO textIO;
         GoogleBooks googleBooks;
 
-        public Wrapper(ConsoleIO consoleIO, GoogleBooks googleBooks)
+        public Wrapper(ITextIO textIO, GoogleBooks googleBooks)
         {
-            this.consoleIO = consoleIO;
+            this.textIO = textIO;
             this.googleBooks = googleBooks;
         }
 
@@ -20,7 +19,7 @@ namespace BookSearch
         {
             DisplayWelcome();
 
-            var input = consoleIO.Prompt("Enter search term...");
+            var input = textIO.Prompt("Enter search term...");
             var books = await googleBooks.Search(input);
 
             PrintBooks(books);
@@ -28,7 +27,7 @@ namespace BookSearch
 
         void DisplayWelcome()
         {
-            consoleIO.Print("Welcome to Book Search!");
+            textIO.Print("Welcome to Book Search!");
         }
 
         void PrintBooks(List<Book> books)
@@ -40,7 +39,7 @@ namespace BookSearch
 
             foreach (var book in books)
             {
-                consoleIO.Print(book.FormatAsString());
+                textIO.Print(book.FormatAsString());
             }
         }
     }
