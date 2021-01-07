@@ -46,7 +46,7 @@ namespace BookSearch
                 bookParamDict.Add("industryIdentifiers", identifiersArr);
             } 
 
-            return new Book(bookParamDict);
+            return new Book(bookParamDict, new BookFormatter());
         }
 
         public string[] GetArrParam(JObject volumeInfo, string key)

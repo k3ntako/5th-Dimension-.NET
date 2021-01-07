@@ -5,17 +5,19 @@ namespace BookSearch
 {
     public class Book
     {
-        readonly string id;
-        readonly string title;
-        readonly string[] authors;
-        readonly string publisher;
-        readonly string description;
-        readonly UInt32 pageCount;
-        readonly string publishedDate;
-        readonly Dictionary<string, string>[] industryIdentifiers;
-        readonly string[] categories;
+        public readonly string id;
+        public readonly string title;
+        public readonly string[] authors;
+        public readonly string publisher;
+        public readonly string description;
+        public readonly UInt32 pageCount;
+        public readonly string publishedDate;
+        public readonly Dictionary<string, string>[] industryIdentifiers;
+        public readonly string[] categories;
 
-        public Book(Dictionary<string, object> bookParams)
+        readonly BookFormatter bookFormatter;
+
+        public Book(Dictionary<string, object> bookParams, BookFormatter bookFormatter)
         {
             id = (string) bookParams["id"];
             title = (string) bookParams["title"];
@@ -26,75 +28,18 @@ namespace BookSearch
             publishedDate = (string)bookParams["publishedDate"];
             industryIdentifiers = (Dictionary<string, string>[])bookParams["industryIdentifiers"];
             categories = (string[])bookParams["categories"];
-            
+
+            this.bookFormatter = bookFormatter;
         }
 
         public string FormatAsString()
         {
-            try
-            {
-                var bookStr = FormatField(title ?? "[No Title]");
-                bookStr += FormatField("Authors", authors);
-                bookStr += FormatField("Publisher", publisher);
-                bookStr += FormatField("Description", description, 150);
-                bookStr += FormatField("Page Count", pageCount.ToString());
-                bookStr += FormatField("Publish Date", publishedDate);
-                bookStr += FormatField("Categories", categories);
-
-                //Dictionary<string, string>[] industryIdentifiers;
-
-                return bookStr;
-            }
-            catch (Exception ex)
-            {
-                Logger.WriteError(ex);
-                return null;
-            }
+            return bookFormatter.FormatAsString(this);
         }
 
-        static string FormatField(string fieldVal)
+        public string FormatAsShortString()
         {
-            if (fieldVal is null)
-            {
-                return "";
-            }
-
-            return $"{fieldVal}{Environment.NewLine}";
-        }
-
-        static string FormatField(string fieldTitle, string fieldVal)
-        {
-            if(fieldVal is null)
-            {
-                return "";
-            }
-
-            return $"{fieldTitle}: {fieldVal}{Environment.NewLine}";
-        }
-
-        static string FormatField(string fieldTitle, string[] fieldVal)
-        {
-            if (fieldVal is null)
-            {
-                return "";
-            }
-
-            return $"{fieldTitle}: {string.Join(", ", fieldVal)}{Environment.NewLine}";
-        }
-
-        static string FormatField(string fieldTitle, string fieldVal, int maxLength)
-        {
-            if (fieldVal is null)
-            {
-                return "";
-            }
-            else if (fieldVal.Length <= maxLength)
-            {
-                return $"{fieldTitle}: {fieldVal}{Environment.NewLine}";
-            }
-
-            var shortVal = fieldVal.Substring(0, Math.Min(fieldVal.Length, maxLength));
-            return $"{fieldTitle}: {shortVal}...{Environment.NewLine}";
+            return bookFormatter.FormatAsShortString(this);
         }
     }
 }

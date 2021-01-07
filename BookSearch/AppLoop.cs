@@ -26,8 +26,9 @@ namespace BookSearch
                 switch (selection)
                 {
                     case "1":
-                        var books = await PromptSearch();
-                        PrintBooks(books);
+                        var searchTerm = PromptSearch();
+                        var books = await FetchSearch(searchTerm);
+                        PrintBooks(searchTerm, books);
                         break;
                     case "2":
                         textIO.Clear();
@@ -49,12 +50,17 @@ namespace BookSearch
             return textIO.Prompt("Enter the number:");
         }
 
-        async Task<List<Book>> PromptSearch()
+        string PromptSearch()
         {
-            var input = textIO.Prompt("Enter search term...");
+            textIO.Clear();
+            return textIO.Prompt("Enter search term...");
+        }
+
+        async Task<List<Book>> FetchSearch(string searchTerm)
+        {
             try
             {
-                return await googleBooks.Search(input);
+                return await googleBooks.Search(searchTerm);
             }
             catch (Exception)
             {
@@ -63,16 +69,19 @@ namespace BookSearch
             }
         }
 
-        void PrintBooks(List<Book> books)
+        void PrintBooks(string searchTerm, List<Book> books)
         {
             if (books is null)
             {
                 return;
             }
 
+            textIO.Clear();
+            textIO.Print($"Showing results for {searchTerm}:{Environment.NewLine}");
+
             foreach (var book in books)
             {
-                textIO.Print(book.FormatAsString());
+                textIO.Print(book.FormatAsShortString());
             }
         }
     }
