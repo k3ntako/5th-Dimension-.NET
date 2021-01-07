@@ -16,8 +16,16 @@ namespace BookSearch
         }
 
         public async Task<JObject> HttpGet(string url){
-            var response = await httpClient.GetStringAsync(url);
-            return jsonIO.Deserialize(response);
+            try
+            {
+                var response = await httpClient.GetStringAsync(url);
+                return jsonIO.Deserialize(response);
+            }
+            catch (System.Exception ex)
+            {
+                Logger.WriteError(ex);
+                throw;
+            }
         }
     }
 }

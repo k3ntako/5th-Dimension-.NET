@@ -38,7 +38,7 @@ namespace BookSearch
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Logger.WriteError(ex);
                 return null;
             }
         }

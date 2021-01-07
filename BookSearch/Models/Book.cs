@@ -48,7 +48,7 @@ namespace BookSearch.Models
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Logger.WriteError(ex);
                 return null;
             }
         }
