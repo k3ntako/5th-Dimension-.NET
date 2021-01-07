@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BookSearch.Models;
 
 
 namespace BookSearch
@@ -57,7 +56,7 @@ namespace BookSearch
             {
                 return await googleBooks.Search(input);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 textIO.Error("There was a problem getting the search results. Please try again.");
                 return null;
