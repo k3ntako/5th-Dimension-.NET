@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace BookSearch
+namespace FifthDimension
 {
     public class Logger
     {

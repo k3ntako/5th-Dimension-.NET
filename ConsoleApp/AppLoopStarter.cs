@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BookSearch
+namespace FifthDimension
 {
     public class AppLoopStarter
     {

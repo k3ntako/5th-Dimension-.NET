@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace BookSearch
+namespace FifthDimension
 {
     public class JsonIO
     {
