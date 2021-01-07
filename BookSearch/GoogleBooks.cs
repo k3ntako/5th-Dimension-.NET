@@ -10,11 +10,13 @@ namespace BookSearch
         readonly string baseUrl = "https://www.googleapis.com/books/v1/";
         readonly string apiKey;
         readonly Fetcher fetcher;
+        readonly BookGenerator bookGenerator;
 
-        public GoogleBooks(Fetcher fetcher, string ApiKey)
+        public GoogleBooks(Fetcher fetcher, string apiKey, BookGenerator bookGenerator)
         {
             this.fetcher = fetcher;
-            this.apiKey = ApiKey;
+            this.apiKey = apiKey;
+            this.bookGenerator = bookGenerator;
         }
 
         public async Task<List<Book>> Search(string input)
@@ -28,7 +30,7 @@ namespace BookSearch
 
                 foreach (var book in items)
                 {
-                    books.Add(new Book(book));
+                    books.Add(bookGenerator.Create(book));
                 }
 
 
@@ -44,7 +46,7 @@ namespace BookSearch
         string GenerateVolumeUrl(string query)
         {
             var fields = "items(id,volumeInfo(title,publishedDate,industryIdentifiers,categories,authors,publisher,description,pageCount))";
-            return $"{this.baseUrl}volumes?q={query}&fields={fields}&maxResults={5}&key={this.apiKey}";
+            return $"{baseUrl}volumes?q={query}&fields={fields}&maxResults={5}&key={apiKey}";
         }
     }
 }

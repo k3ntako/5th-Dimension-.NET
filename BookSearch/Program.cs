@@ -16,7 +16,7 @@ namespace BookSearch
             string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
-            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey);
+            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, new BookGenerator());
             var appLoop = new AppLoop(textIO, googleBooks);
 
             var wrapper = new AppLoopStarter(textIO, appLoop);

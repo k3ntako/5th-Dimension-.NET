@@ -16,42 +16,17 @@ namespace BookSearch.Models
         readonly Dictionary<string, string>[] industryIdentifiers;
         readonly string[] categories;
 
-        public Book(JToken bookParams)
+        public Book(Dictionary<string, object> bookParams)
         {
-            try
-            {
-                id = bookParams.Value<string>("id");
-
-                var volumeInfo = bookParams.Value<JObject>("volumeInfo");
-
-                title = volumeInfo.Value<string>("title");
-                publisher = volumeInfo.Value<string>("publisher");
-                description = volumeInfo.Value<string>("description");
-                pageCount = volumeInfo.Value<UInt32>("pageCount");
-                publishedDate = volumeInfo.Value<string>("publishedDate");
-
-                var authorsJArray = (JArray)volumeInfo.GetValue("authors");
-                if (authorsJArray is not null)
-                {
-                    authors = authorsJArray.ToObject<string[]>();
-                }
-
-                var identifiersJArray = (JArray)volumeInfo.GetValue("industryIdentifiers");
-                if(identifiersJArray is not null)
-                {
-                    industryIdentifiers = identifiersJArray.ToObject<Dictionary<string, string>[]>();
-                }
-
-                var categoriesJArray = (JArray)volumeInfo.GetValue("categories");
-                if(categoriesJArray is not null)
-                {
-                    categories = categoriesJArray.ToObject<string[]>();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            id = (string) bookParams["id"];
+            title = (string) bookParams["title"];
+            authors = (string[]) bookParams["authors"];
+            publisher = (string) bookParams["publisher"];
+            description = (string) bookParams["description"];
+            pageCount = (UInt32) bookParams["pageCount"];
+            publishedDate = (string)bookParams["publishedDate"];
+            industryIdentifiers = (Dictionary<string, string>[])bookParams["industryIdentifiers"];
+            categories = (string[])bookParams["categories"];
             
         }
 
