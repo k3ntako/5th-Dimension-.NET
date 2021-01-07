@@ -53,7 +53,15 @@ namespace BookSearch
         async Task<List<Book>> PromptSearch()
         {
             var input = textIO.Prompt("Enter search term...");
-            return await googleBooks.Search(input);
+            try
+            {
+                return await googleBooks.Search(input);
+            }
+            catch (Exception ex)
+            {
+                textIO.Error("There was a problem getting the search results. Please try again.");
+                return null;
+            }
         }
 
         void PrintBooks(List<Book> books)

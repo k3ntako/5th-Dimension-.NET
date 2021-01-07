@@ -21,26 +21,19 @@ namespace BookSearch
 
         public async Task<List<Book>> Search(string input)
         {
-            try
+          
+            var response = await fetcher.HttpGet(GenerateVolumeUrl(input));
+            var items = response.GetValue("items");
+
+            List<Book> books = new List<Book>();
+
+            foreach (var book in items)
             {
-                var response = await fetcher.HttpGet(GenerateVolumeUrl(input));
-                var items = response.GetValue("items");
-
-                List<Book> books = new List<Book>();
-
-                foreach (var book in items)
-                {
-                    books.Add(bookGenerator.Create(book));
-                }
-
-
-                return books;
+                books.Add(bookGenerator.Create(book));
             }
-            catch (Exception ex)
-            {
-                Logger.WriteError(ex);
-                return null;
-            }
+
+
+            return books;
         }
 
         string GenerateVolumeUrl(string query)
