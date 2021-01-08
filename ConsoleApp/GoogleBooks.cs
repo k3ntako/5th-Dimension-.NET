@@ -6,29 +6,29 @@ namespace FifthDimension
 {
     public class GoogleBooks
     {
-        readonly string baseUrl = "https://www.googleapis.com/books/v1/";
-        readonly string apiKey;
-        readonly Fetcher fetcher;
-        readonly BookGenerator bookGenerator;
+        readonly string BaseUrl = "https://www.googleapis.com/books/v1/";
+        readonly string ApiKey;
+        readonly Fetcher Fetcher;
+        readonly BookGenerator BookGenerator;
 
         public GoogleBooks(Fetcher fetcher, string apiKey, BookGenerator bookGenerator)
         {
-            this.fetcher = fetcher;
-            this.apiKey = apiKey;
-            this.bookGenerator = bookGenerator;
+            Fetcher = fetcher;
+            ApiKey = apiKey;
+            BookGenerator = bookGenerator;
         }
 
         public async Task<List<Book>> Search(string input)
         {
           
-            var response = await fetcher.HttpGet(GenerateVolumeUrl(input));
+            var response = await Fetcher.HttpGet(GenerateVolumeUrl(input));
             var items = response.GetValue("items");
 
             List<Book> books = new List<Book>();
 
             foreach (var book in items)
             {
-                books.Add(bookGenerator.Create(book));
+                books.Add(BookGenerator.Create(book));
             }
 
 
@@ -38,7 +38,7 @@ namespace FifthDimension
         string GenerateVolumeUrl(string query)
         {
             var fields = "items(id,volumeInfo(title,publishedDate,industryIdentifiers,categories,authors,publisher,description,pageCount))";
-            return $"{baseUrl}volumes?q={query}&fields={fields}&maxResults={5}&key={apiKey}";
+            return $"{BaseUrl}volumes?q={query}&fields={fields}&maxResults={5}&key={ApiKey}";
         }
     }
 }

@@ -11,13 +11,13 @@ namespace FifthDimension
         {
             try
             {
-                var bookStr = FormatField(book.title ?? "[No Title]");
-                bookStr += FormatField("Authors", book.authors);
-                bookStr += FormatField("Publisher", book.publisher);
-                bookStr += FormatField("Description", book.description, 150);
-                bookStr += FormatField("Page Count", book.pageCount.ToString());
-                bookStr += FormatField("Publish Date", book.publishedDate);
-                bookStr += FormatField("Categories", book.categories);
+                var bookStr = FormatField(book.Title ?? "[No Title]");
+                bookStr += FormatField("Authors", book.Authors);
+                bookStr += FormatField("Publisher", book.Publisher);
+                bookStr += FormatField("Description", book.Description, 150);
+                bookStr += FormatField("Page Count", book.PageCount.ToString());
+                bookStr += FormatField("Publish Date", book.PublishedDate);
+                bookStr += FormatField("Categories", book.Categories);
 
                 //Dictionary<string, string>[] industryIdentifiers;
 
@@ -34,10 +34,10 @@ namespace FifthDimension
         {
             try
             {
-                var bookStr = FormatField(book.title ?? "[No Title]");
-                bookStr += FormatField("Authors", book.authors);
-                bookStr += FormatField("Publisher", book.publisher);
-                bookStr += FormatField("Publish Date", book.publishedDate);
+                var bookStr = FormatField(book.Title ?? "[No Title]");
+                bookStr += FormatField("Authors", book.Authors);
+                bookStr += FormatField("Publisher", book.Publisher);
+                bookStr += FormatField("Publish Date", book.PublishedDate);
 
                 return bookStr;
             }

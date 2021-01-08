@@ -7,13 +7,13 @@ namespace FifthDimension
 {
     public class AppLoop
     {
-        readonly ITextIO textIO;
-        readonly GoogleBooks googleBooks;
+        readonly ITextIO TextIO;
+        readonly GoogleBooks GoogleBooks;
 
         public AppLoop(ITextIO textIO, GoogleBooks googleBooks)
         {
-            this.textIO = textIO;
-            this.googleBooks = googleBooks;
+            TextIO = textIO;
+            GoogleBooks = googleBooks;
         }
 
         public async Task Start()
@@ -21,7 +21,7 @@ namespace FifthDimension
             while (true)
             {
                 var selection = PromptMainMenu();
-                textIO.Clear();
+                TextIO.Clear();
 
                 switch (selection)
                 {
@@ -31,11 +31,11 @@ namespace FifthDimension
                         PrintBooks(searchTerm, books);
                         break;
                     case "2":
-                        textIO.Clear();
+                        TextIO.Clear();
                         Environment.Exit(0);
                         break;
                     default:
-                        textIO.Print("Could not undestand your input. Please try again.");
+                        TextIO.Print("Could not undestand your input. Please try again.");
                         break;
                 }
             }
@@ -43,28 +43,28 @@ namespace FifthDimension
 
         string PromptMainMenu()
         {
-            textIO.Print("-- Main Menu --");
-            textIO.Print("1. Search");
-            textIO.Print("2. Exit");
+            TextIO.Print("-- Main Menu --");
+            TextIO.Print("1. Search");
+            TextIO.Print("2. Exit");
 
-            return textIO.Prompt("Enter the number:");
+            return TextIO.Prompt("Enter the number:");
         }
 
         string PromptSearch()
         {
-            textIO.Clear();
-            return textIO.Prompt("Enter search term...");
+            TextIO.Clear();
+            return TextIO.Prompt("Enter search term...");
         }
 
         async Task<List<Book>> FetchSearch(string searchTerm)
         {
             try
             {
-                return await googleBooks.Search(searchTerm);
+                return await GoogleBooks.Search(searchTerm);
             }
             catch (Exception)
             {
-                textIO.Error("There was a problem getting the search results. Please try again.");
+                TextIO.Error("There was a problem getting the search results. Please try again.");
                 return null;
             }
         }
@@ -76,12 +76,12 @@ namespace FifthDimension
                 return;
             }
 
-            textIO.Clear();
-            textIO.Print($"Showing results for {searchTerm}:{Environment.NewLine}");
+            TextIO.Clear();
+            TextIO.Print($"Showing results for {searchTerm}:{Environment.NewLine}");
 
             foreach (var book in books)
             {
-                textIO.Print(book.FormatAsShortString());
+                TextIO.Print(book.FormatAsShortString());
             }
         }
     }

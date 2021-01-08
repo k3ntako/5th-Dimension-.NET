@@ -5,41 +5,41 @@ namespace FifthDimension
 {
     public class Book
     {
-        public readonly string id;
-        public readonly string title;
-        public readonly string[] authors;
-        public readonly string publisher;
-        public readonly string description;
-        public readonly UInt32 pageCount;
-        public readonly string publishedDate;
-        public readonly Dictionary<string, string>[] industryIdentifiers;
-        public readonly string[] categories;
+        public string Id { get; }
+        public string Title { get; }
+        public string[] Authors { get; }
+        public string Publisher { get; }
+        public string Description { get; }
+        public UInt32 PageCount { get; }
+        public string PublishedDate { get; }
+        public Dictionary<string, string>[] IndustryIdentifiers { get; }
+        public string[] Categories { get; }
 
-        readonly BookFormatter bookFormatter;
+        readonly BookFormatter BookFormatter;
 
         public Book(Dictionary<string, object> bookParams, BookFormatter bookFormatter)
         {
-            id = (string) bookParams["id"];
-            title = (string) bookParams["title"];
-            authors = (string[]) bookParams["authors"];
-            publisher = (string) bookParams["publisher"];
-            description = (string) bookParams["description"];
-            pageCount = (UInt32) bookParams["pageCount"];
-            publishedDate = (string)bookParams["publishedDate"];
-            industryIdentifiers = (Dictionary<string, string>[])bookParams["industryIdentifiers"];
-            categories = (string[])bookParams["categories"];
+            Id = (string) bookParams["id"];
+            Title = (string) bookParams["title"];
+            Authors = (string[]) bookParams["authors"];
+            Publisher = (string) bookParams["publisher"];
+            Description = (string) bookParams["description"];
+            PageCount = (UInt32) bookParams["pageCount"];
+            PublishedDate = (string)bookParams["publishedDate"];
+            IndustryIdentifiers = (Dictionary<string, string>[])bookParams["industryIdentifiers"];
+            Categories = (string[])bookParams["categories"];
 
-            this.bookFormatter = bookFormatter;
+            BookFormatter = bookFormatter;
         }
 
         public string FormatAsString()
         {
-            return bookFormatter.FormatAsString(this);
+            return BookFormatter.FormatAsString(this);
         }
 
         public string FormatAsShortString()
         {
-            return bookFormatter.FormatAsShortString(this);
+            return BookFormatter.FormatAsShortString(this);
         }
     }
 }

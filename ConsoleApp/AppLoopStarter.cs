@@ -4,24 +4,24 @@ namespace FifthDimension
 {
     public class AppLoopStarter
     {
-        readonly ITextIO textIO;
-        readonly AppLoop appLoop;
+        readonly ITextIO TextIO;
+        readonly AppLoop AppLoop;
 
         public AppLoopStarter(ITextIO textIO, AppLoop appLoop)
         {
-            this.textIO = textIO;
-            this.appLoop = appLoop;
+            TextIO = textIO;
+            AppLoop = appLoop;
         }
 
         public async Task Start()
         {
             PrintWelcome();
-            await appLoop.Start();
+            await AppLoop.Start();
         }
 
         void PrintWelcome()
         {
-            textIO.Print("Welcome to Book Search!");
+            TextIO.Print("Welcome to Book Search!");
         }
     }
 }
