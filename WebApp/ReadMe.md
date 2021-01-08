@@ -1,6 +1,6 @@
-﻿# 5th Dimension .NET Console App
+﻿# 5th Dimension .NET Web App
 
-This is the console app project. Please see the [solution's ReadMe](https://github.com/k3ntako/5th-Dimension-.NET/blob/master/ReadMe.md) for more information.
+This is the web app project. Please see the [solution's ReadMe](https://github.com/k3ntako/5th-Dimension-.NET/blob/master/ReadMe.md) for more information.
 
 
 ## Getting Started
@@ -24,9 +24,6 @@ This is the console app project. Please see the [solution's ReadMe](https://gith
 5. In your command line, navigate to the project directory (where this ReadMe file exists).
 6. Run the program!
     - This command will build and run the program.
-    - You made need to install/configure HTTPS certificates on your first run.
     ```
     $ dotnet run
     ```
-7. In your browser, go to the localhost URL printed in the console.
- 
