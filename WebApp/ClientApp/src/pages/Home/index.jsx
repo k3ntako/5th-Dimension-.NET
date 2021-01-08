@@ -8,23 +8,29 @@ export const Home = () => {
     setSearchTerm(input);
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    console.log("api");
+    await fetch(`/api/booksearch?q=${searchTerm}`);
+  };
+
   return (
     <div>
       <h1>Fifth Dimension</h1>
       <h3>Google Books Search</h3>
 
-      <form className="input-group searchBar">
+      <form className="input-group searchBar" onSubmit={onSubmit}>
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           placeholder="Enter a term..."
           value={searchTerm}
           onChange={safeSetSearch}
         />
         <div className="input-group-append">
           <button
-            class="btn btn-primary"
-            type="button"
+            className="btn btn-primary"
+            type="submit"
             disabled={!searchTerm.trim()}
           >
             Search
