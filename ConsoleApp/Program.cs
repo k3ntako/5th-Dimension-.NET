@@ -16,7 +16,8 @@ namespace FifthDimension
             string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
-            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, new BookGenerator());
+            var bookGenerator = new BookGenerator(new BookFormatter());
+            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, bookGenerator);
             var appLoop = new AppLoop(textIO, googleBooks);
 
             var wrapper = new AppLoopStarter(textIO, appLoop);

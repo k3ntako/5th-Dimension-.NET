@@ -9,9 +9,11 @@ namespace FifthDimension
         readonly string[] strParams = new string[] {
             "title", "publisher", "description", "publishedDate"
         };
+        BookFormatter bookFormatter;
 
-        public BookGenerator()
+        public BookGenerator(BookFormatter bookFormatter)
         {
+            this.bookFormatter = bookFormatter;
         }
 
         public Book Create(JToken bookParams)
@@ -46,7 +48,7 @@ namespace FifthDimension
                 bookParamDict.Add("industryIdentifiers", identifiersArr);
             } 
 
-            return new Book(bookParamDict, new BookFormatter());
+            return new Book(bookParamDict, bookFormatter);
         }
 
         public string[] GetArrParam(JObject volumeInfo, string key)
