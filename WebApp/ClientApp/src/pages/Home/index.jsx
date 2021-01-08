@@ -1,8 +1,10 @@
 ﻿import React, { useState } from "react";
+import { Book } from "../../components/Book";
 import "./Home.css";
 
 export const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [books, setBooks] = useState([]);
   const safeSetSearch = (e) => {
     const input = e.target.value;
     setSearchTerm(input);
@@ -10,8 +12,9 @@ export const Home = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("api");
-    await fetch(`/api/booksearch?q=${searchTerm}`);
+    const response = await fetch(`/api/booksearch?q=${searchTerm}`);
+    const booksJson = await response.json();
+    setBooks(booksJson);
   };
 
   return (
@@ -37,6 +40,16 @@ export const Home = () => {
           </button>
         </div>
       </form>
+
+      {!!books.length && (
+        <div className="results">
+          <div>
+            {books.map((book) => (
+              <Book key={book.id} book={book} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
