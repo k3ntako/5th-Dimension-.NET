@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace ConsoleAppTests
 {
-    public class BookFormatterTests
+    public class BookStringFormatterTests
     {
         Book book;
 
@@ -24,14 +24,14 @@ namespace ConsoleAppTests
             bookParams.Add("categories", new string[] {"Candy", "Computer Programming"});
 
 
-            book = new Book(bookParams, new BookFormatter());
+            book = new Book(bookParams, new BookStringFormatter());
         }
 
         [Test]
         public void FormatAsShortString_Should_Return_Expected_Fields()
         {
-            var bookFormatter = new BookFormatter();
-            var str = bookFormatter.FormatAsShortString(book);
+            var bookStringFormatter = new BookStringFormatter();
+            var str = bookStringFormatter.FormatAsShortString(book);
 
             StringAssert.Contains(".NET For Smarties", str);
             StringAssert.Contains("Authors: Henry Isaac Rowntree, Joseph Rowntree", str);
@@ -42,8 +42,8 @@ namespace ConsoleAppTests
         [Test]
         public void FormatAsString_Should_Return_Expected_Fields()
         {
-            var bookFormatter = new BookFormatter();
-            var str = bookFormatter.FormatAsString(book);
+            var bookStringFormatter = new BookStringFormatter();
+            var str = bookStringFormatter.FormatAsString(book);
 
             StringAssert.Contains(".NET For Smarties", str);
             StringAssert.Contains("Authors: Henry Isaac Rowntree, Joseph Rowntree", str);

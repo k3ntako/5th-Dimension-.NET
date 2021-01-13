@@ -1,9 +1,9 @@
 ﻿using System;
 namespace ConsoleApp
 {
-    public class BookFormatter
+    public class BookStringFormatter
     {
-        public BookFormatter()
+        public BookStringFormatter()
         {
         }
 

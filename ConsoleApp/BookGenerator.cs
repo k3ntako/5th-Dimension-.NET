@@ -9,11 +9,11 @@ namespace ConsoleApp
         readonly string[] strParams = new string[] {
             "title", "publisher", "description", "publishedDate"
         };
-        BookFormatter bookFormatter;
+        BookStringFormatter bookStringFormatter;
 
-        public BookGenerator(BookFormatter bookFormatter)
+        public BookGenerator(BookStringFormatter bookStringFormatter)
         {
-            this.bookFormatter = bookFormatter;
+            this.bookStringFormatter = bookStringFormatter;
         }
 
         public Book Create(JToken bookParams)
@@ -48,7 +48,7 @@ namespace ConsoleApp
                 bookParamDict.Add("industryIdentifiers", identifiersArr);
             } 
 
-            return new Book(bookParamDict, bookFormatter);
+            return new Book(bookParamDict, bookStringFormatter);
         }
 
         public string[] GetArrParam(JObject volumeInfo, string key)

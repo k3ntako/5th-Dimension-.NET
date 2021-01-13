@@ -15,9 +15,9 @@ namespace ConsoleApp
         public Dictionary<string, string>[] IndustryIdentifiers { get; }
         public string[] Categories { get; }
 
-        readonly BookFormatter BookFormatter;
+        readonly BookStringFormatter BookStringFormatter;
 
-        public Book(Dictionary<string, object> bookParams, BookFormatter bookFormatter)
+        public Book(Dictionary<string, object> bookParams, BookStringFormatter bookStringFormatter)
         {
             Id = (string) bookParams["id"];
             Title = (string) bookParams["title"];
@@ -29,17 +29,17 @@ namespace ConsoleApp
             IndustryIdentifiers = (Dictionary<string, string>[])bookParams["industryIdentifiers"];
             Categories = (string[])bookParams["categories"];
 
-            BookFormatter = bookFormatter;
+            BookStringFormatter = bookStringFormatter;
         }
 
         public string FormatAsString()
         {
-            return BookFormatter.FormatAsString(this);
+            return BookStringFormatter.FormatAsString(this);
         }
 
         public string FormatAsShortString()
         {
-            return BookFormatter.FormatAsShortString(this);
+            return BookStringFormatter.FormatAsShortString(this);
         }
     }
 }
