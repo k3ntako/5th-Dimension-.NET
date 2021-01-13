@@ -4,14 +4,14 @@ using Newtonsoft.Json.Linq;
 
 namespace ConsoleApp
 {
-    public class BookGenerator
+    public class GoogleBookJsonParser
     {
         readonly string[] strParams = new string[] {
             "title", "publisher", "description", "publishedDate"
         };
         BookStringFormatter bookStringFormatter;
 
-        public BookGenerator(BookStringFormatter bookStringFormatter)
+        public GoogleBookJsonParser(BookStringFormatter bookStringFormatter)
         {
             this.bookStringFormatter = bookStringFormatter;
         }

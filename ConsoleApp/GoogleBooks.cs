@@ -9,13 +9,13 @@ namespace ConsoleApp
         readonly string BaseUrl = "https://www.googleapis.com/books/v1/";
         readonly string ApiKey;
         readonly Fetcher Fetcher;
-        readonly BookGenerator BookGenerator;
+        readonly GoogleBookJsonParser GoogleBookJsonParser;
 
-        public GoogleBooks(Fetcher fetcher, string apiKey, BookGenerator bookGenerator)
+        public GoogleBooks(Fetcher fetcher, string apiKey, GoogleBookJsonParser googleBookJsonParser)
         {
             Fetcher = fetcher;
             ApiKey = apiKey;
-            BookGenerator = bookGenerator;
+            GoogleBookJsonParser = googleBookJsonParser;
         }
 
         public async Task<List<Book>> Search(string input)
@@ -28,7 +28,7 @@ namespace ConsoleApp
 
             foreach (var book in items)
             {
-                books.Add(BookGenerator.Create(book));
+                books.Add(GoogleBookJsonParser.Create(book));
             }
 
 
