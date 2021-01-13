@@ -26,8 +26,8 @@ namespace WebApp.Controllers
             string googleBooksApiKey = (string)apiKeys.GetValue("GoogleBooksApiKey");
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
-            var bookGenerator = new GoogleBookJsonParser(new BookStringFormatter());
-            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, bookGenerator);
+            var googleBookJsonParser = new GoogleBookJsonParser();
+            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, googleBookJsonParser);
 
             var books = await googleBooks.Search(q);
 

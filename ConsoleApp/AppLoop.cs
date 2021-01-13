@@ -9,11 +9,13 @@ namespace ConsoleApp
     {
         readonly ITextIO TextIO;
         readonly GoogleBooks GoogleBooks;
+        readonly BookStringFormatter BookStringFormatter;
 
-        public AppLoop(ITextIO textIO, GoogleBooks googleBooks)
+        public AppLoop(ITextIO textIO, GoogleBooks googleBooks, BookStringFormatter bookStringFormatter)
         {
             TextIO = textIO;
             GoogleBooks = googleBooks;
+            BookStringFormatter = bookStringFormatter;
         }
 
         public async Task Start()
@@ -81,7 +83,7 @@ namespace ConsoleApp
 
             foreach (var book in books)
             {
-                TextIO.Print(book.FormatAsShortString());
+                TextIO.Print(BookStringFormatter.FormatAsShortString(book));
             }
         }
     }

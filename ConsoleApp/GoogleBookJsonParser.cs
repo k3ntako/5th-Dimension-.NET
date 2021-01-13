@@ -9,14 +9,12 @@ namespace ConsoleApp
         readonly string[] strParams = new string[] {
             "title", "publisher", "description", "publishedDate"
         };
-        BookStringFormatter bookStringFormatter;
 
-        public GoogleBookJsonParser(BookStringFormatter bookStringFormatter)
+        public GoogleBookJsonParser()
         {
-            this.bookStringFormatter = bookStringFormatter;
         }
 
-        public Book Create(JToken bookParams)
+        public Dictionary<string, object> Parse(JToken bookParams)
         {
             Dictionary<string, object> bookParamDict = new Dictionary<string, object>();
 
@@ -46,9 +44,9 @@ namespace ConsoleApp
             {
                 var identifiersArr = identifiersJArray.ToObject<Dictionary<string, string>[]>();
                 bookParamDict.Add("industryIdentifiers", identifiersArr);
-            } 
+            }
 
-            return new Book(bookParamDict, bookStringFormatter);
+            return bookParamDict;
         }
 
         public string[] GetArrParam(JObject volumeInfo, string key)

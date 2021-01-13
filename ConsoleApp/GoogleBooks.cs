@@ -26,9 +26,10 @@ namespace ConsoleApp
 
             List<Book> books = new List<Book>();
 
-            foreach (var book in items)
+            foreach (var bookJson in items)
             {
-                books.Add(GoogleBookJsonParser.Create(book));
+                var bookParams = GoogleBookJsonParser.Parse(bookJson);
+                books.Add(new Book(bookParams));
             }
 
 

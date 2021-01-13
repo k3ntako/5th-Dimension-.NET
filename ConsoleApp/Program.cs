@@ -16,9 +16,9 @@ namespace ConsoleApp
             string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
-            var googleBookJsonParser = new GoogleBookJsonParser(new BookStringFormatter());
+            var googleBookJsonParser = new GoogleBookJsonParser();
             var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, googleBookJsonParser);
-            var appLoop = new AppLoop(textIO, googleBooks);
+            var appLoop = new AppLoop(textIO, googleBooks, new BookStringFormatter());
 
             var wrapper = new AppLoopStarter(textIO, appLoop);
             await wrapper.Start();

@@ -24,7 +24,7 @@ namespace ConsoleAppTests
             bookParams.Add("categories", new string[] {"Candy", "Computer Programming"});
 
 
-            book = new Book(bookParams, new BookStringFormatter());
+            book = new Book(bookParams);
         }
 
         [Test]
