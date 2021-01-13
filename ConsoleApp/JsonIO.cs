@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace FifthDimension
+namespace ConsoleApp
 {
     public class JsonIO
     {

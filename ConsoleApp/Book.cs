@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FifthDimension
+namespace ConsoleApp
 {
     public class Book
     {

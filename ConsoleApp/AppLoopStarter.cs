@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace FifthDimension
+namespace ConsoleApp
 {
     public class AppLoopStarter
     {

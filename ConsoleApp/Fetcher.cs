@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace FifthDimension
+namespace ConsoleApp
 {
     public class Fetcher
     {

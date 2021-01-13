@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace FifthDimension
+namespace ConsoleApp
 {
     public class BookGenerator
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace FifthDimension
+namespace ConsoleApp
 {
     public class ConsoleIO : ITextIO
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FifthDimension
+namespace ConsoleApp
 {
     public class Logger
     {
