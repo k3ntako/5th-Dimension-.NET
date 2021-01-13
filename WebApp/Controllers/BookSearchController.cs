@@ -22,7 +22,7 @@ namespace WebApp.Controllers
         public async Task<List<Book>> Get(string q)
         {
             var jsonIO = new JsonIO();
-            var apiKeys = jsonIO.DeserializeFromRelativePath("./", "ApiKeys.json");
+            var apiKeys = jsonIO.DeserializeFromRelativePath("./", "env.json");
             string googleBooksApiKey = (string)apiKeys.GetValue("GoogleBooksApiKey");
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
