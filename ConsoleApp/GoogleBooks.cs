@@ -11,10 +11,10 @@ namespace ConsoleApp
         readonly Fetcher Fetcher;
         readonly GoogleBookJsonParser GoogleBookJsonParser;
 
-        public GoogleBooks(Fetcher fetcher, string apiKey, GoogleBookJsonParser googleBookJsonParser)
+        public GoogleBooks(Fetcher fetcher, GoogleBookJsonParser googleBookJsonParser)
         {
             Fetcher = fetcher;
-            ApiKey = apiKey;
+            ApiKey = Environment.GetEnvironmentVariable("fd_GoogleBooksApiKey");
             GoogleBookJsonParser = googleBookJsonParser;
         }
 

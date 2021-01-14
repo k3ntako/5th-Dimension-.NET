@@ -12,12 +12,12 @@ namespace ConsoleApp
             textIO.Clear();
 
             var jsonIO = new JsonIO();
-            var apiKeys = jsonIO.DeserializeFromRelativePath("./", "env.json");
-            string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
+            var envConfigurator = new EnvConfigurator(jsonIO);
+            envConfigurator.SetEnvFromFile("./", "env.json");
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
             var googleBookJsonParser = new GoogleBookJsonParser();
-            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, googleBookJsonParser);
+            var googleBooks = new GoogleBooks(fetcher, googleBookJsonParser);
             var appLoop = new AppLoop(textIO, googleBooks, new BookStringFormatter());
 
             var wrapper = new AppLoopStarter(textIO, appLoop);
