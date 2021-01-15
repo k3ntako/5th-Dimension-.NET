@@ -1,16 +1,17 @@
 ﻿using System.IO;
+using ConsoleApp.interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace ConsoleApp
 {
-    public class JsonIO
+    public class JsonIO : IJsonIO
     {
         public JsonIO()
         {
         }
 
-        public dynamic DeserializeFromRelativePath(string relativeTo, string path) {
+        public JObject DeserializeFromRelativePath(string relativeTo, string path) {
             string filePath = Path.GetRelativePath(relativeTo, path);
             string jsonStr = File.ReadAllText(filePath);
 

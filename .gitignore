@@ -1,6 +1,6 @@
 # Api Keys
-ApiKeys.json
-log.txt
+env.json
+*.log
 
 # Defaults from Visual Studio
 # globs

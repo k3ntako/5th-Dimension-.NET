@@ -22,12 +22,12 @@ namespace WebApp.Controllers
         public async Task<List<Book>> Get(string q)
         {
             var jsonIO = new JsonIO();
-            var apiKeys = jsonIO.DeserializeFromRelativePath("./", "ApiKeys.json");
+            var apiKeys = jsonIO.DeserializeFromRelativePath("./", "env.json");
             string googleBooksApiKey = (string)apiKeys.GetValue("GoogleBooksApiKey");
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
             var googleBookJsonParser = new GoogleBookJsonParser();
-            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, googleBookJsonParser);
+            var googleBooks = new GoogleBooks(fetcher, googleBookJsonParser);
 
             var books = await googleBooks.Search(q);
 

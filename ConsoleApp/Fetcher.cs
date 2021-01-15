@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
+using ConsoleApp.interfaces;
 using Newtonsoft.Json.Linq;
 
 namespace ConsoleApp
@@ -7,9 +8,9 @@ namespace ConsoleApp
     public class Fetcher
     {
         HttpClient httpClient;
-        readonly JsonIO jsonIO;
+        readonly IJsonIO jsonIO;
 
-        public Fetcher(HttpClient httpClient, JsonIO jsonIO)
+        public Fetcher(HttpClient httpClient, IJsonIO jsonIO)
         {
             this.httpClient = httpClient;
             this.jsonIO = jsonIO;

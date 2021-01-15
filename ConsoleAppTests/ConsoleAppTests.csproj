@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp\ConsoleApp.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="mocks\" />
+  </ItemGroup>
 </Project>

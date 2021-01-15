@@ -6,14 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ApiKeys.json" />
+    <None Remove="env.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApiKeys.json">
+    <Content Include="env.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="interfaces\" />
   </ItemGroup>
 </Project>
