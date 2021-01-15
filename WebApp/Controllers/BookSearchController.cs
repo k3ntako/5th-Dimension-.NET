@@ -21,11 +21,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public async Task<List<Book>> Get(string q)
         {
-            var jsonIO = new JsonIO();
-            var apiKeys = jsonIO.DeserializeFromRelativePath("./", "env.json");
-            string googleBooksApiKey = (string)apiKeys.GetValue("GoogleBooksApiKey");
-
-            var fetcher = new Fetcher(new HttpClient(), jsonIO);
+            var fetcher = new Fetcher(new HttpClient(), new JsonIO());
             var googleBookJsonParser = new GoogleBookJsonParser();
             var googleBooks = new GoogleBooks(fetcher, googleBookJsonParser);
 

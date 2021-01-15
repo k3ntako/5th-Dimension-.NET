@@ -1,3 +1,5 @@
+using System;
+using ConsoleApp;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -66,6 +68,10 @@ namespace WebApp
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+
+            var envConfigurator = new EnvConfigurator(new JsonIO());
+            envConfigurator.SetEnvFromFile("./", "env.json");
         }
     }
 }
