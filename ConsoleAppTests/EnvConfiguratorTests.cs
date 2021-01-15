@@ -16,7 +16,7 @@ namespace ConsoleAppTests
             var mockObject = new JObject
             {
                 { "GoogleBooksApiKey", "mock_key" },
-                { "LogDirectory", "/logs/fifth-dimension/log.log" }
+                { "LogFilePath", "/logs/fifth-dimension/logs.log" }
             };
 
             JsonIOMock = new JsonIOMock(mockObject);
@@ -39,11 +39,29 @@ namespace ConsoleAppTests
         {
             var envConfigurator = new EnvConfigurator(JsonIOMock);
 
-            envConfigurator.SetEnvFromFile("./", "env.jso");
-            var logDirectory = Environment.GetEnvironmentVariable("fd_LogDirectory");
+            envConfigurator.SetEnvFromFile("./", "env.json");
+            var logDirectory = Environment.GetEnvironmentVariable("fd_LogFilePath");
 
             Assert.NotNull(logDirectory);
-            Assert.AreEqual("/logs/fifth-dimension/log.log", logDirectory);
+            Assert.AreEqual("/logs/fifth-dimension/logs.log", logDirectory);
+        }
+
+        [Test]
+        public void Set_Env_From_File_Log_Directory_Default ()
+        {
+            var mockObject = new JObject
+            {
+                { "GoogleBooksApiKey", "mock_key" },
+            };
+
+            var jsonIOMock = new JsonIOMock(mockObject);
+            var envConfigurator = new EnvConfigurator(jsonIOMock);
+
+            envConfigurator.SetEnvFromFile("./", "env.jso");
+            var logDirectory = Environment.GetEnvironmentVariable("fd_LogFilePath");
+
+            Assert.NotNull(logDirectory);
+            Assert.AreEqual("./logs.log", logDirectory);
         }
     }
 }

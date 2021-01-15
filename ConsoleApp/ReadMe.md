@@ -28,3 +28,8 @@ This is the console app project. Please see the [solution's ReadMe](https://gith
    $ dotnet run
    ```
 7. In your browser, go to the localhost URL printed in the console.
+
+## Enviroment Variables
+
+In addition to the API Key mentioned in Getting Started, you can add `LogFilePath`
+(default: `./logs.log`). This will specify the location the log files will be created.

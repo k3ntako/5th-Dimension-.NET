@@ -19,8 +19,14 @@ namespace ConsoleApp
             string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
             Environment.SetEnvironmentVariable("fd_GoogleBooksApiKey", googleBooksApiKey);
 
-            string logDirectory = (string)apiKeys.GetValue("LogDirectory");
-            Environment.SetEnvironmentVariable("fd_LogDirectory", logDirectory);
+            string logDirectory = (string)apiKeys.GetValue("LogFilePath");
+
+            if (logDirectory is null)
+            {
+                logDirectory = "./logs.log";
+            }
+
+            Environment.SetEnvironmentVariable("fd_LogFilePath", logDirectory);
         }
     }
 }
