@@ -22,14 +22,8 @@ namespace ConsoleApp
 
         private void SetLogFilePath(JObject apiKeys)
         {
-            string logDirectory = (string)apiKeys.GetValue("LogFilePath");
-
-            if (logDirectory is null)
-            {
-                logDirectory = "./logs.log";
-            }
-
-            Environment.SetEnvironmentVariable("fd_LogFilePath", logDirectory);
+            string logPath = (string)apiKeys.GetValue("LogFilePath");
+            Environment.SetEnvironmentVariable("fd_LogFilePath", logPath);
         }
 
         private void SetGoogleBooksApiKey(JObject apiKeys)

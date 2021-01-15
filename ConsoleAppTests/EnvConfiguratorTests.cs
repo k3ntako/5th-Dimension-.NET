@@ -45,23 +45,5 @@ namespace ConsoleAppTests
             Assert.NotNull(logDirectory);
             Assert.AreEqual("/logs/fifth-dimension/logs.log", logDirectory);
         }
-
-        [Test]
-        public void Set_Env_From_File_Log_Directory_Default ()
-        {
-            var mockObject = new JObject
-            {
-                { "GoogleBooksApiKey", "mock_key" },
-            };
-
-            var jsonIOMock = new JsonIOMock(mockObject);
-            var envConfigurator = new EnvConfigurator(jsonIOMock);
-
-            envConfigurator.SetEnvFromFile("./", "env.jso");
-            var logDirectory = Environment.GetEnvironmentVariable("fd_LogFilePath");
-
-            Assert.NotNull(logDirectory);
-            Assert.AreEqual("./logs.log", logDirectory);
-        }
     }
 }

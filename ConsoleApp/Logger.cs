@@ -38,8 +38,14 @@ namespace ConsoleApp
         private static StreamWriter CreateStreamWriter()
         {
             string filePath = Environment.GetEnvironmentVariable("fd_LogFilePath");
+
+            if (filePath is null)
+            {
+                filePath = "./logs.log";
+            }
+
             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-            return File.AppendText(Environment.GetEnvironmentVariable(filePath));
+            return File.AppendText(filePath);
         }
     }
 }

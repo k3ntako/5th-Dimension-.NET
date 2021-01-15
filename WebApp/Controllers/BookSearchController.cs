@@ -27,7 +27,7 @@ namespace WebApp.Controllers
 
             var fetcher = new Fetcher(new HttpClient(), jsonIO);
             var googleBookJsonParser = new GoogleBookJsonParser();
-            var googleBooks = new GoogleBooks(fetcher, googleBooksApiKey, googleBookJsonParser);
+            var googleBooks = new GoogleBooks(fetcher, googleBookJsonParser);
 
             var books = await googleBooks.Search(q);
 
