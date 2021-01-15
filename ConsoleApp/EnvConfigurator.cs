@@ -15,10 +15,13 @@ namespace ConsoleApp
         public void SetEnvFromFile(string relativeTo, string path)
         {
             JObject apiKeys = JsonIO.DeserializeFromRelativePath(relativeTo, path);
-            
-            string googleBooksApiKey = (string) apiKeys.GetValue("GoogleBooksApiKey");
-            Environment.SetEnvironmentVariable("fd_GoogleBooksApiKey", googleBooksApiKey);
 
+            SetLogFilePath(apiKeys);
+            SetGoogleBooksApiKey(apiKeys);
+        }
+
+        private void SetLogFilePath(JObject apiKeys)
+        {
             string logDirectory = (string)apiKeys.GetValue("LogFilePath");
 
             if (logDirectory is null)
@@ -27,6 +30,17 @@ namespace ConsoleApp
             }
 
             Environment.SetEnvironmentVariable("fd_LogFilePath", logDirectory);
+        }
+
+        private void SetGoogleBooksApiKey(JObject apiKeys)
+        {
+            string googleBooksApiKey = (string)apiKeys.GetValue("GoogleBooksApiKey");
+            Environment.SetEnvironmentVariable("fd_GoogleBooksApiKey", googleBooksApiKey);
+
+            if (googleBooksApiKey is null)
+            {
+                throw new Exception("Google Books API key is undefined");
+            }
         }
     }
 }
