@@ -5,22 +5,22 @@ using Newtonsoft.Json.Linq;
 
 namespace ConsoleApp
 {
-    public class Fetcher
+    public class Fetcher : IFetcher
     {
-        HttpClient httpClient;
-        readonly IJsonIO jsonIO;
+        readonly HttpClient HttpClient;
+        readonly IJsonIO JsonIO;
 
         public Fetcher(HttpClient httpClient, IJsonIO jsonIO)
         {
-            this.httpClient = httpClient;
-            this.jsonIO = jsonIO;
+            HttpClient = httpClient;
+            JsonIO = jsonIO;
         }
 
         public async Task<JObject> HttpGet(string url){
             try
             {
-                var response = await httpClient.GetStringAsync(url);
-                return jsonIO.Deserialize(response);
+                var response = await HttpClient.GetStringAsync(url);
+                return JsonIO.Deserialize(response);
             }
             catch (System.Exception ex)
             {

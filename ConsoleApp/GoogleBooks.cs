@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ConsoleApp.interfaces;
 
 namespace ConsoleApp
 {
@@ -8,10 +9,10 @@ namespace ConsoleApp
     {
         readonly string BaseUrl = "https://www.googleapis.com/books/v1/";
         readonly string ApiKey;
-        readonly Fetcher Fetcher;
+        readonly IFetcher Fetcher;
         readonly GoogleBookJsonParser GoogleBookJsonParser;
 
-        public GoogleBooks(Fetcher fetcher, GoogleBookJsonParser googleBookJsonParser)
+        public GoogleBooks(IFetcher fetcher, GoogleBookJsonParser googleBookJsonParser)
         {
             Fetcher = fetcher;
             ApiKey = Environment.GetEnvironmentVariable("fd_GoogleBooksApiKey");

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using ConsoleApp.interfaces;
 
 namespace ConsoleApp
 {
@@ -10,12 +10,19 @@ namespace ConsoleApp
         readonly ITextIO TextIO;
         readonly GoogleBooks GoogleBooks;
         readonly BookStringFormatter BookStringFormatter;
+        readonly IEnvExit EnvExit;
 
-        public AppLoop(ITextIO textIO, GoogleBooks googleBooks, BookStringFormatter bookStringFormatter)
+        public AppLoop(
+            ITextIO textIO,
+            GoogleBooks googleBooks,
+            BookStringFormatter bookStringFormatter,
+            IEnvExit envExit
+        )
         {
             TextIO = textIO;
             GoogleBooks = googleBooks;
             BookStringFormatter = bookStringFormatter;
+            EnvExit = envExit;
         }
 
         public async Task Start()
@@ -34,13 +41,15 @@ namespace ConsoleApp
                         break;
                     case "2":
                         TextIO.Clear();
-                        Environment.Exit(0);
+                        goto Exit;
                         break;
                     default:
                         TextIO.Print("Could not undestand your input. Please try again.");
                         break;
                 }
             }
+
+            Exit: EnvExit.Exit(0);
         }
 
         string PromptMainMenu()
