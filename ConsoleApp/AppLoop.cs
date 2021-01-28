@@ -42,7 +42,6 @@ namespace ConsoleApp
                     case "2":
                         TextIO.Clear();
                         goto Exit;
-                        break;
                     default:
                         TextIO.Print("Could not undestand your input. Please try again.");
                         break;
