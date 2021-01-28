@@ -53,9 +53,10 @@ namespace ConsoleApp
 
         string PromptMainMenu()
         {
-            TextIO.Print("-- Main Menu --");
-            TextIO.Print("1. Search");
-            TextIO.Print("2. Exit");
+            TextIO.Print(
+                "-- Main Menu --\n" +
+                "1. Search\n" +
+                "2. Exit");
 
             return TextIO.Prompt("Enter the number:");
         }

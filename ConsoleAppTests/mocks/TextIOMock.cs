@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ConsoleApp;
 
 namespace ConsoleAppTests.mocks
@@ -6,11 +7,17 @@ namespace ConsoleAppTests.mocks
     public class TextIOMock : ITextIO
     {
         public MockCalls MockCalls = new MockCalls();
-        public readonly string MockPrompt;
+        public readonly List<string> MockPrompts;
+        int MockPromptIndex = 0;
 
         public TextIOMock(string mockPrompt)
         {
-            MockPrompt = mockPrompt;
+            MockPrompts = new List<string> { mockPrompt };
+        }
+
+        public TextIOMock(List<string> mockPrompts)
+        {
+            MockPrompts = mockPrompts;
         }
 
         public void Clear()
@@ -36,7 +43,14 @@ namespace ConsoleAppTests.mocks
         public string Prompt(string question)
         {
             MockCalls.AddWithSingleArgument("Prompt", question);
-            return MockPrompt;
+            var mockPromptResponse = MockPrompts[MockPromptIndex];
+
+            if(MockPromptIndex < MockPrompts.Count - 1)
+            {
+                MockPromptIndex++;
+            }
+
+            return mockPromptResponse;
         }
     }
 }
