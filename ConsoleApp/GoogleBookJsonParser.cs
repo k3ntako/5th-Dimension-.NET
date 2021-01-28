@@ -26,7 +26,7 @@ namespace ConsoleApp
                 bookParamDict.Add(key, volumeInfo.Value<string>(key));
             }
 
-            bookParamDict.Add("pageCount", bookParams.Value<UInt32>("pageCount"));
+            bookParamDict.Add("pageCount", volumeInfo.Value<UInt32>("pageCount"));
 
             var authorsArr = GetArrParam(volumeInfo, "authors");
             bookParamDict.Add("authors", authorsArr);
@@ -35,7 +35,7 @@ namespace ConsoleApp
             bookParamDict.Add("categories", categoriesArr);
 
 
-            var identifiersJArray = (JArray) volumeInfo.GetValue("industryIdentifiers");
+            var identifiersJArray = volumeInfo.GetValue("industryIdentifiers");
             if (identifiersJArray is null)
             {
                 bookParamDict.Add("industryIdentifiers", null);
@@ -49,7 +49,7 @@ namespace ConsoleApp
             return bookParamDict;
         }
 
-        public string[] GetArrParam(JObject volumeInfo, string key)
+        string[] GetArrParam(JObject volumeInfo, string key)
         {
             var paramArr = (JArray) volumeInfo.GetValue(key);
 

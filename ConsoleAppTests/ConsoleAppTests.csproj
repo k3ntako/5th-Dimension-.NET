@@ -18,4 +18,7 @@
   <ItemGroup>
     <Folder Include="mocks\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="GoogleBookJsonParserTests.cs" />
+  </ItemGroup>
 </Project>
